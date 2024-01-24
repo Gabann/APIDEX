@@ -6,10 +6,9 @@ import PokemonList from "@/components/pokemonList.vue";
 
 <template>
 
-	<filters>
-	</filters>
+  <filters></filters>
 
-	<pokemon-list></pokemon-list>
+  <pokemon-list></pokemon-list>
 
 </template>
 

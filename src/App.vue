@@ -8,23 +8,22 @@ import {RouterLink, RouterView} from 'vue-router';
 </script>
 
 <template>
-	<header-component></header-component>
+  <header-component></header-component>
 
-	<div class="container-fluid">
+  <div class="container-fluid">
+
+	<main>
+
+	  <div class="col-10 mx-auto">
+		<RouterView/>
+	  </div>
+	  
+	</main>
+
+  </div>
 
 
-		<main>
-
-			<div class="col-10 mx-auto">
-				<RouterView/>
-			</div>
-
-
-		</main>
-	</div>
-
-
-	<footer-component></footer-component>
+  <footer-component></footer-component>
 </template>
 
 <style scoped>

@@ -1,19 +1,25 @@
 import {defineStore} from "pinia";
+import {ref} from "vue";
+import router from "@/router/router.js";
 
-const email = "test@email.com";
-const password = "qwfpg";
+export const useAuthenticationStore = defineStore('authenticationStore', () =>
+{
+	const email = "test@email.com";
+	const password = "qwfpgj";
+	let loggedIn = ref(false);
 
-import router from "@/router/index.js";
-
-export const useAuthenticationStore = defineStore('authenticationStore', () => {
-	function logIn(emailInput, passwordInput) {
-		if (email === emailInput && password === passwordInput) {
+	function logIn(emailInput, passwordInput)
+	{
+		if (email === emailInput && password === passwordInput)
+		{
+			loggedIn.value = true;
+			localStorage.setItem("username", email);
 			router.push('/');
-		} else {
+		} else
+		{
 			console.log("wrong email or password");
 		}
 	}
 
-	return {logIn};
+	return {logIn, loggedIn, email};
 });
-

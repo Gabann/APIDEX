@@ -1,10 +1,9 @@
 <script setup>
-
 import LogComponent from "@/components/logComponent.vue";
 </script>
 
 <template>
-	<LogComponent></LogComponent>
+  <LogComponent></LogComponent>
 </template>
 
 <style scoped>

@@ -1,3 +1,99 @@
 :root {
-	--main-color: cornflowerblue
+	--main-color: cornflowerblue;
+
+	--normal-color: #9fa19f;
+	--feu-color: #e62829;
+	--eau-color: #2980ef;
+	--electrik-color: #fac000;
+	--plante-color: #3fa129;
+	--glace-color: #3fd8ff;
+	--combat-color: #ff8000;
+	--poison-color: #8f41cb;
+	--sol-color: #915121;
+	--vol-color: #81b9ef;
+	--psy-color: #ef4179;
+	--insecte-color: #91a119;
+	--roche-color: #afa981;
+	--spectre-color: #704170;
+	--dragon-color: #5061e1;
+	--tenebres-color: #50413f;
+	--acier-color: #60a1b8;
+	--fee-color: #ef71ef;
+}
+
+/*body {
+	background-color: #18191a !important;
+	color: #c3bfba !important;
+}*/
+
+.Fée {
+	background-color: var(--fee-color);
+}
+
+.Normal {
+	background-color: var(--normal-color);
+}
+
+.Feu {
+	background-color: var(--feu-color);
+}
+
+.Eau {
+	background-color: var(--eau-color);
+}
+
+.Électrik {
+	background-color: var(--electrik-color);
+}
+
+.Plante {
+	background-color: var(--plante-color);
+}
+
+.Glace {
+	background-color: var(--glace-color);
+}
+
+.Combat {
+	background-color: var(--combat-color);
+}
+
+.Poison {
+	background-color: var(--poison-color);
+}
+
+.Sol {
+	background-color: var(--sol-color);
+}
+
+.Vol {
+	background-color: var(--vol-color);
+}
+
+.Psy {
+	background-color: var(--psy-color);
+}
+
+.Insecte {
+	background-color: var(--insecte-color);
+}
+
+.Roche {
+	background-color: var(--roche-color);
+}
+
+.Spectre {
+	background-color: var(--spectre-color);
+}
+
+.Dragon {
+	background-color: var(--dragon-color);
+}
+
+.Ténèbres {
+	background-color: var(--tenebres-color);
+}
+
+.Acier {
+	background-color: var(--acier-color);
 }
