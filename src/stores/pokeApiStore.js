@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {Pokemon} from "../pokemon.js";
+import {Pokemon} from "../class/pokemon.js";
 import {ref} from "vue";
 
 const baseUrl = 'https://tyradex.tech/api/v1/';

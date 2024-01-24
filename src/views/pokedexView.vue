@@ -1,14 +1,13 @@
 <script setup>
-
 import Filters from "@/components/filters.vue";
 import PokemonList from "@/components/pokemonList.vue";
 </script>
 
 <template>
 
-  <filters></filters>
+	<filters></filters>
 
-  <pokemon-list></pokemon-list>
+	<pokemon-list></pokemon-list>
 
 </template>
 
