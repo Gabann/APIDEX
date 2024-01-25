@@ -3,6 +3,7 @@ import {onMounted, ref, watch, watchEffect} from "vue";
 import PokemonCard from "@/components/pokemonCard.vue";
 import {Modal} from "bootstrap";
 import {useFilterStore} from "@/stores/filterStore.js";
+import PokemonModal from "@/components/pokemonModal.vue";
 
 let filterStore = useFilterStore();
 
@@ -11,7 +12,6 @@ let pokemonsPerPage = 20;
 
 let modal;
 let modalPokemon = ref({});
-let modalPokemonShiny = ref(false);
 
 function switchPage(targetPage) {
 	if (targetPage !== currentPage.value) {
@@ -32,6 +32,7 @@ function forceNumberInput(event) {
 onMounted(() => {
 	modal = new Modal(document.getElementById('pokemonModal'));
 });
+
 </script>
 
 <template>
@@ -41,7 +42,7 @@ onMounted(() => {
 			<template v-for="(pokemon, index) in filterStore.filteredPokemonArray">
 				<div class="col-xl-3 col-md-4 col-12" style="padding: 20px"
 				     v-if="index < (pokemonsPerPage * currentPage) && index >= (currentPage * pokemonsPerPage) - pokemonsPerPage">
-					<PokemonCard :pokemon="pokemon" @click="displayModal(pokemon)"></PokemonCard>
+					<PokemonCard :pokemon="pokemon" @display-modal="displayModal"></PokemonCard>
 				</div>
 			</template>
 		</div>
@@ -89,78 +90,11 @@ onMounted(() => {
 	</div>
 
 
-	<!--	Todo try to use v-model for this-->
-	<div class="modal" id="pokemonModal" tabindex="-1" aria-labelledby="pokemonModal" aria-hidden="true" v-if="modalPokemon">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-
-				<div class="modal-header">
-					<h5 class="modal-title" id="pokemonModal" v-if="modalPokemon.name">
-						{{ modalPokemon.pokedexId }} - {{ modalPokemon.name.fr }}
-					</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-
-				<div class="modal-body">
-					<div class="pokemon-modal">
-						<div class="row" v-if="modalPokemon.sprites">
-							<img :src="modalPokemonShiny ? modalPokemon.sprites.shiny : modalPokemon.sprites.regular">
-							<div>
-								<button @click="modalPokemonShiny = !modalPokemonShiny">
-
-									<i :class="'bi ' + (modalPokemonShiny ? 'bi-star-fill' : 'bi-star')"></i>
-								</button>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-3">
-								<p>Taille:</p>
-							</div>
-							<div class="col-9">
-								<p>{{ modalPokemon.height }}</p>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-3">
-								<p>Poids:</p>
-							</div>
-							<div class="col-9">
-								<p>{{ modalPokemon.weight }}</p>
-							</div>
-						</div>
-
-						<div class="row" v-if="modalPokemon.types">
-							<div class="col-3">
-								<p>Types:</p>
-							</div>
-							<div class="col-9">
-								<p v-for="type in modalPokemon.types">{{ type.name }}</p>
-							</div>
-						</div>
-
-
-						<div class="row" v-if="modalPokemon.talents">
-							<div class="col-3">
-								<p>Talent:</p>
-							</div>
-							<div class="col-9">
-								<span v-for="talent in modalPokemon.talents">{{ talent.name }} / </span>
-							</div>
-						</div>
-
-						<div class="row" v-if="modalPokemon.talents">
-							<div class="col-12">
-								<p>PV {{ modalPokemon.stats.hp }}</p>
-								<p>Attaque {{ modalPokemon.stats.atk }}</p>
-								<p>Defense {{ modalPokemon.stats.def }}</p>
-								<p>Attaque Spéciale {{ modalPokemon.stats.spe_atk }}</p>
-								<p>Défense Spéciale {{ modalPokemon.stats.spe_def }}</p>
-								<p>Vitesse {{ modalPokemon.stats.vit }}</p>
-							</div>
-						</div>
-					</div>
+	<div v-if="modalPokemon">
+		<div class="modal" id="pokemonModal" tabindex="-1" aria-labelledby="pokemonModal" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<PokemonModal v-bind:pokemon="modalPokemon"></PokemonModal>
 				</div>
 			</div>
 		</div>

@@ -5,7 +5,7 @@ import {RouterView} from 'vue-router';
 </script>
 
 <template>
-	<header-component></header-component>
+	<header-component class="header"></header-component>
 
 	<div class="container-fluid">
 
@@ -20,8 +20,24 @@ import {RouterView} from 'vue-router';
 	</div>
 
 
-	<footer-component></footer-component>
+	<footer-component class="footer"></footer-component>
 </template>
 
-<style scoped>
+<style>
+:root {
+	--header-height: 7vh;
+	--footer-height: 7vh;
+}
+
+.header {
+	height: var(--header-height);
+}
+
+.container-fluid {
+	min-height: calc(100vh - var(--header-height) - var(--footer-height));
+}
+
+.footer {
+	height: var(--footer-height);
+}
 </style>

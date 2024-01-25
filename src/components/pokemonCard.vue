@@ -7,7 +7,7 @@ const props = defineProps({
 <template>
 	<div class="pokemon-card">
 		<div class="row">
-			<img :src="pokemon.sprites.regular" alt="pokemon-sprite">
+			<img :src="pokemon.sprites.regular" @click="$emit('display-modal', pokemon)" alt="pokemon-sprite">
 		</div>
 
 		<div class="row">
@@ -53,8 +53,8 @@ const props = defineProps({
 			<div class="col-9 d-flex">
 				<div :class="type.name" v-for="type in pokemon.types" class="pokemon-type col-5 h-100 d-flex align-items-center"
 				     style="justify-content: space-between">
-					<span style="padding: 0 10px 0 10px">{{ type.name }}</span>
-					<img class="" :src="type.image" alt="pokemon-type">
+					<span style="padding: 0 10px 0 10px" class="col-8 text-center">{{ type.name }}</span>
+					<img class="col-4" :src="type.image" alt="pokemon-type">
 				</div>
 			</div>
 		</div>

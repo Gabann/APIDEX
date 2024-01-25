@@ -21,11 +21,6 @@
 	--fee-color: #ef71ef;
 }
 
-/*body {
-	background-color: #18191a !important;
-	color: #c3bfba !important;
-}*/
-
 .Fée {
 	background-color: var(--fee-color);
 }
@@ -96,4 +91,28 @@
 
 .Acier {
 	background-color: var(--acier-color);
+}
+
+.Health {
+	accent-color: #a0f0a0;
+}
+
+.Attack {
+	accent-color: #f0a0a0;
+}
+
+.Defense {
+	accent-color: #f0f0a0;
+}
+
+.SpeAtt {
+	accent-color: #f8c8a0;
+}
+
+.SpeDef {
+	accent-color: #e8c868;
+}
+
+.Speed {
+	accent-color: #a0f0f0;
 }
