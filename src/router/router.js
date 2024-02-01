@@ -10,7 +10,6 @@ const routes = [
 	{path: '/not-found', component: NotFound},
 	{path: '/', redirect: "/pokedex/1"},
 	{path: '/pokedex/', redirect: "/pokedex/1"},
-	{path: '/pokedex/:page', component: PokedexView},
 	{path: '/pokemon/:id', component: PokemonDetails},
 	{path: '/login', component: LogInVue},
 ];

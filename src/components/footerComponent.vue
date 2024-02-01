@@ -37,6 +37,7 @@ footer {
 	background-color: var(--main-color);
 	height: 7vh;
 	padding: 0 30px 0 30px;
+	margin-top: 15px;
 }
 
 .image-container {

@@ -58,8 +58,20 @@ export const usePokeApiStore = defineStore('pokeApi', () => {
 		return results;
 	}
 
+	function getPokemonById(id) {
+		return allPokemons.find((pokemon) => {
+			return pokemon.pokedexId == id;
+		});
+	}
+
+	function getPokemonByName(name) {
+		return allPokemons.find((pokemon) => {
+			return pokemon.name.fr.toLowerCase() === name.toLowerCase();
+		});
+	}
+
 	getAllPokemons();
 
-	return {allPokemons};
+	return {allPokemons, getPokemonByName, getPokemonById};
 });
 
