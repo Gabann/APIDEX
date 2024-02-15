@@ -1,7 +1,7 @@
 <script setup>
 import {ref} from "vue";
 
-const props = defineProps({
+defineProps({
 	pokemon: Object,
 });
 
@@ -10,16 +10,16 @@ let isShiny = ref(false);
 
 <template>
 	<div class="modal-header">
-		<h5 class="modal-title" id="pokemonModal" v-if="pokemon.name">
+		<h5 v-if="pokemon.name" id="pokemonModal" class="modal-title">
 			{{ pokemon.pokedexId }} - {{ pokemon.name.fr }}
 		</h5>
-		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
 	</div>
 
 	<div class="modal-body">
 		<div class="pokemon-modal">
-			<div class="row" v-if="pokemon.sprites">
-				<img :src="isShiny ? pokemon.sprites.shiny : pokemon.sprites.regular">
+			<div v-if="pokemon.sprites" class="row">
+				<img :src="isShiny ? pokemon.sprites.shiny : pokemon.sprites.regular" alt="pokemon sprite">
 				<div>
 					<button @click="isShiny = !isShiny">
 
@@ -46,7 +46,7 @@ let isShiny = ref(false);
 				</div>
 			</div>
 
-			<div class="row" v-if="pokemon.types">
+			<div v-if="pokemon.types" class="row">
 				<div class="col-3">
 					<p>Types:</p>
 				</div>
@@ -56,7 +56,7 @@ let isShiny = ref(false);
 			</div>
 
 
-			<div class="row" v-if="pokemon.talents">
+			<div v-if="pokemon.talents" class="row">
 				<div class="col-3">
 					<p>Talent:</p>
 				</div>
@@ -68,7 +68,7 @@ let isShiny = ref(false);
 				</div>
 			</div>
 
-			<div class="row" v-if="pokemon.talents">
+			<div v-if="pokemon.talents" class="row">
 				<div class="col-12">
 					<p>PV {{ pokemon.stats.hp }}</p>
 					<p>Attaque {{ pokemon.stats.atk }}</p>

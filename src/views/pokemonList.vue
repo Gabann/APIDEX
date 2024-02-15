@@ -1,9 +1,9 @@
 <script setup>
-import {onMounted, ref, watch, watchEffect} from "vue";
 import PokemonCard from "@/components/pokemonCard.vue";
-import {Modal} from "bootstrap";
-import {useFilterStore} from "@/stores/filterStore.js";
 import PokemonModal from "@/components/pokemonModal.vue";
+import {useFilterStore} from "@/stores/filterStore.js";
+import {Modal} from "bootstrap";
+import {onMounted, ref} from "vue";
 
 let filterStore = useFilterStore();
 
@@ -26,7 +26,7 @@ function displayModal(pokemon) {
 }
 
 function forceNumberInput(event) {
-	event.target.value = Number(event.target.value.replace(/[^0-9]/g, Number(1)));
+	event.target.value = Number(event.target.value.replace(/^0-9/g, Number(1)));
 }
 
 onMounted(() => {
@@ -40,8 +40,9 @@ onMounted(() => {
 		<div class="d-flex flex-wrap">
 
 			<template v-for="(pokemon, index) in filterStore.filteredPokemonArray">
-				<div class="col-xl-3 col-md-4 col-12" style="padding: 20px"
-				     v-if="index < (pokemonsPerPage * currentPage) && index >= (currentPage * pokemonsPerPage) - pokemonsPerPage">
+				<div v-if="index < (pokemonsPerPage * currentPage) && index >= (currentPage * pokemonsPerPage) - pokemonsPerPage"
+				     class="col-xl-3 col-md-4 col-12"
+				     style="padding: 20px">
 					<PokemonCard :pokemon="pokemon" @display-modal="displayModal"></PokemonCard>
 				</div>
 			</template>
@@ -57,18 +58,18 @@ onMounted(() => {
 					<li class="page-item">
 						<button class="btn btn-outline-primary page-button" @click="switchPage(currentPage - 1)">&lt;</button>
 					</li>
-					<li class="page-item page-number" v-if="currentPage - 1 > 0">
+					<li v-if="currentPage - 1 > 0" class="page-item page-number">
 						<button class="btn btn-outline-primary page-button" @click="switchPage(currentPage-1)">{{ currentPage - 1 }}
 						</button>
 					</li>
 					<li class="page-item page-number">
-						<input type="number" class="btn btn-outline-primary page-button" style="width: auto" @input="forceNumberInput"
-						       :value="currentPage"
-						       @change="switchPage($event.target.value)">
+						<input :value="currentPage" class="btn btn-outline-primary page-button" style="width: auto" type="number"
+						       @change="switchPage($event.target.value)"
+						       @input="forceNumberInput">
 					</li>
 					<li class="page-item page-number">
-						<button class="btn btn-outline-primary page-button"
-						        v-if="currentPage + 1 < filterStore.filteredPokemonArray.length / 20"
+						<button v-if="currentPage + 1 < filterStore.filteredPokemonArray.length / 20"
+						        class="btn btn-outline-primary page-button"
 						        @click="switchPage(currentPage+1)">
 							{{ currentPage + 1 }}
 						</button>
@@ -83,7 +84,7 @@ onMounted(() => {
 			</nav>
 		</div>
 	</div>
-	<div style="display: flex; justify-content: center; align-items: center; height: 50vh;" v-else>
+	<div v-else style="display: flex; justify-content: center; align-items: center; height: 50vh;">
 		<div>
 			<h1>Aucun pokemon ne correspond a la recherche</h1>
 		</div>
@@ -91,7 +92,7 @@ onMounted(() => {
 
 
 	<div v-if="modalPokemon">
-		<div class="modal" id="pokemonModal" tabindex="-1" aria-labelledby="pokemonModal" aria-hidden="true">
+		<div id="pokemonModal" aria-hidden="true" aria-labelledby="pokemonModal" class="modal" tabindex="-1">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<PokemonModal v-bind:pokemon="modalPokemon"></PokemonModal>

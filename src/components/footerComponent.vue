@@ -5,19 +5,19 @@ const currentYear = new Date().getFullYear();
 <template>
 	<footer class="d-flex align-items-center">
 		<div class="col-4 h-100 d-flex align-items-center">
-			<a href="https://github.com/Gabann" class="image-container">
-				<img src="https://avatars.githubusercontent.com/u/40118785?v=4">
+			<a class="image-container" href="https://github.com/Gabann">
+				<img alt="github profile picture" src="https://avatars.githubusercontent.com/u/40118785?v=4">
 			</a>
 		</div>
 
 		<div class="col-4 h-100 d-flex align-items-center justify-content-center flex-wrap">
 			
 			<span class="w-100 text-center">
-				Data from <a href="https://tyradex.tech/">Tyradex</a>
+				<a href="https://github.com/Gabann/APIDEX">Source code</a>
 			</span>
 
 			<span class="w-100 text-center">
-				<a href="https://github.com/Gabann/APIDEX">Source code</a>
+				Data from <a href="https://tyradex.tech/">Tyradex</a>
 			</span>
 
 			<span class="w-100 text-center">

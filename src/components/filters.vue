@@ -7,82 +7,76 @@ let filterStore = useFilterStore();
 let generationFilter = ref(new Filter('generation', ''));
 let nameFilter = ref("");
 const pokemonTypes = ['Acier', 'Combat', 'Dragon', 'Eau', 'Électrik', 'Fée', 'Feu', 'Glace', 'Insecte', 'Normal', 'Plante', 'Poison',
-  'Psy', 'Roche', 'Sol', 'Spectre', 'Ténèbres', 'Vol'];
+	'Psy', 'Roche', 'Sol', 'Spectre', 'Ténèbres', 'Vol'];
 
-watch(nameFilter, (newValue, oldValue) =>
-{
-  filterStore.searchQuery = newValue;
+watch(nameFilter, (newValue) => {
+	filterStore.searchQuery = newValue;
 });
 
-function handleCheckboxChange(event, type)
-{
-  if (event.target.checked)
-  {
-	filterStore.addFilter(new Filter('types', type));
-	event.target.classList.toggle("unselected");
-  } else
-  {
-	filterStore.removeFilter(new Filter('types', type));
-  }
+function handleCheckboxChange(event, type) {
+	if (event.target.checked) {
+		filterStore.addFilter(new Filter('types', type));
+		event.target.classList.toggle("unselected");
+	} else {
+		filterStore.removeFilter(new Filter('types', type));
+	}
 }
 
-function clearFilters()
-{
-  nameFilter.value = '';
-  filterStore.clearFilters();
+function clearFilters() {
+	nameFilter.value = '';
+	filterStore.clearFilters();
 
-  document.querySelector('#generation-filter').value = '';
+	document.querySelector('#generation-filter').value = '';
 
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-  for (const checkbox of checkboxes)
-  {
-	checkbox.checked = false;
-  }
+	const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+	for (const checkbox of checkboxes) {
+		checkbox.checked = false;
+	}
 }
 </script>
 
 <template>
-  <div class="py-4 d-flex  justify-content-center align-items-center flex-column">
-	<label for='generation-filter'></label>
-	<select id='generation-filter' v-model="generationFilter.filter" @change="filterStore.addFilter(generationFilter)">
-	  <option value="" disabled selected>Generation filter</option>
-	  <option value="">Aucun</option>
-	  <option :value=i v-for="i in 9">{{ i }}</option>
-	</select>
+	<div class="py-4 d-flex  justify-content-center align-items-center flex-column">
+		<label for='generation-filter'></label>
+		<select id='generation-filter' v-model="generationFilter.filter" @change="filterStore.addFilter(generationFilter)">
+			<option disabled selected value="">Generation filter</option>
+			<option value="">Aucun</option>
+			<option v-for="i in 9" :value=i>{{ i }}</option>
+		</select>
 
-	<div class="row">
-	  <input type="text" name="" id="" placeholder="Nom ou numéro de pokedex" v-model="nameFilter">
-	</div>
+		<div class="row">
+			<input id="" v-model="nameFilter" name="" placeholder="Nom ou numéro de pokedex" type="text">
+		</div>
 
-	<div class="d-flex flex-wrap type-filter-container">
-	  <div v-for="type in pokemonTypes" :key="type">
-		<input type="checkbox" :id="type" :value="type" @change="handleCheckboxChange($event, type)" v-show="false">
-		<label :for="type" :class="type" class="type">{{ type }}</label>
-	  </div>
-	</div>
+		<div class="d-flex flex-wrap type-filter-container">
+			<div v-for="type in pokemonTypes" :key="type">
+				<input v-show="false" :id="type" :value="type" type="checkbox" @change="handleCheckboxChange($event, type)">
+				<label :class="type" :for="type" class="type">{{ type }}</label>
+			</div>
+		</div>
 
-	<div class="row">
-	  <button class="btn btn-danger" @click="clearFilters">Clear filters</button>
+		<div class="row">
+			<button class="btn btn-danger" @click="clearFilters">Clear filters</button>
+		</div>
 	</div>
-  </div>
 </template>
 
 <style scoped>
 .type {
-  margin: 5px 10px 5px 10px;
-  padding: 0 10px 0 10px;
-  border-radius: 10px;
+	margin: 5px 10px 5px 10px;
+	padding: 0 10px 0 10px;
+	border-radius: 10px;
 }
 
 label {
-  text-align: center;
+	text-align: center;
 }
 
 input[type="checkbox"]:not(:checked) + label {
-  opacity: 0.3;
+	opacity: 0.3;
 }
 
 input[type="checkbox"]:hover + label {
-  opacity: 0.65;
+	opacity: 0.65;
 }
 </style>

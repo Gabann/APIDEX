@@ -1,32 +1,53 @@
 <!--suppress EqualityComparisonWithCoercionJS -->
 <script setup>
+import router from "@/router/router.js";
 import {useRoute} from "vue-router";
-import {usePokeApiStore} from "@/stores/pokeApiStore.js";
 
 const route = useRoute();
+import {ref, watch} from "vue";
+import {usePokeApiStore} from "@/stores/pokeApiStore.js";
 
 let pokemonStore = usePokeApiStore();
-// let pokemon = pokemonStore.allPokemons.find((pokemon) => {
-// 	return pokemon.pokedexId == route.params.id;
-// });
-let pokemon = pokemonStore.getPokemonById(route.params.id);
+let pokemon = ref({});
+setPokemonById(route.params.id);
 
+function setPokemonById(id) {
+	pokemon.value = pokemonStore.getPokemonById(id);
+}
+
+function setPokemonByName(pokemonName) {
+	pokemon.value = pokemonStore.getPokemonByName(pokemonName);
+
+	router.replace({
+		path: "/pokemon/" + pokemon.value.pokedexId
+	});
+
+	window.history.pushState({}, '', '/pokemon/' + pokemon.value.pokedexId);
+}
+
+function getEvolutionPokemon(pokemonName) {
+	return pokemonStore.getPokemonByName(pokemonName);
+}
+
+watch(route, (to) => {
+	pokemon.value = pokemonStore.getPokemonById(to.params.id);
+});
 </script>
 
 <template>
-	<div class="col-4" style="margin-left: auto;  margin-right: auto;">
-		<table class="table table-bordered table-responsive">
-			<thead style="border-style: none">
+	<div class="col-5" style="margin-left: auto;  margin-right: auto;">
+		<table aria-describedby="pokemon details" class="table table-bordered table-responsive">
+			<thead>
 				<tr>
-					<td colspan="1"><span>№{{ pokemon.pokedexId }}</span></td>
-					<td colspan="3"><span>{{ pokemon.name.fr }}</span></td>
+					<th colspan="1"><span>№{{ pokemon.pokedexId }}</span></th>
+					<th colspan="3"><span>{{ pokemon.name.fr }}</span></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<td class="center-image" colspan="4">
 						<div class="center-div">
-							<img class="img-fluid" :src="pokemon.sprites.regular" alt="pokemon sprite">
+							<img :src="pokemon.sprites.regular" alt="pokemon sprite" class="img-fluid">
 						</div>
 					</td>
 				</tr>
@@ -57,9 +78,12 @@ let pokemon = pokemonStore.getPokemonById(route.params.id);
 						<span>Types</span>
 					</td>
 					<td>
-	                    <span v-for="type in pokemon.types">{{ type.name }}<img style="height: 2em; width: auto" class="col-4 img-fluid"
-	                                                                            :src="type.image"
-	                                                                            alt="pokemon-type"></span>
+						<div style="display: flex; align-items: center;">
+							<span v-for="type in pokemon.types" style="display: flex;margin: auto 5px auto 0">{{ type.name }}&nbsp;<img
+								:src="type.image"
+								alt="pokemon-type" class="col-4 img-fluid" style="height: 1.75em;width: auto">
+							</span>
+						</div>
 					</td>
 				</tr>
 
@@ -107,11 +131,12 @@ let pokemon = pokemonStore.getPokemonById(route.params.id);
 					<td>
 						<span>Groupe d'oeuf</span>
 					</td>
+
 					<td>
-										<span v-for="eggGroup in pokemon.egg_group">
-											{{ eggGroup }}
-											<br>
-										</span>
+						<span v-for="eggGroup in pokemon.egg_group">
+							{{ eggGroup }}
+							<br>
+						</span>
 					</td>
 				</tr>
 
@@ -131,8 +156,8 @@ let pokemon = pokemonStore.getPokemonById(route.params.id);
 					<td>
 						<span>{{ pokemon.genderRatio.male }}% Male, {{ pokemon.genderRatio.female }}% Femelle</span>
 						<br>
-						<progress max="100" v-bind:value="pokemon.genderRatio.male"
-						          style="accent-color: cornflowerblue; background-color: hotpink"></progress>
+						<progress max="100" style="accent-color: cornflowerblue; background-color: hotpink"
+						          v-bind:value="pokemon.genderRatio.male"></progress>
 					</td>
 				</tr>
 
@@ -148,8 +173,76 @@ let pokemon = pokemonStore.getPokemonById(route.params.id);
 		</table>
 	</div>
 
-	<div class="col-5" style="margin: auto">
-		<table class="table table-striped table-hover table-bordered">
+	<div v-if="pokemon.evolution" class="col-4" style="margin-left: auto;  margin-right: auto;">
+		<table aria-describedby="pokemon evolution line" class="evolution-table table table-bordered table-responsive">
+			<thead>
+				<tr>
+					<th colspan="2">Famille d'évolution de {{ pokemon.name.fr }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="evolution in pokemon.evolution.pre">
+					<td colspan="2">
+						<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+							<img :src="getEvolutionPokemon(evolution.name).sprites.regular" alt="pokemon evolution sprite">
+							<br>
+							<router-link :to="{path: '/pokemon/' + getEvolutionPokemon(evolution.name).pokedexId}">
+								{{ getEvolutionPokemon(evolution.name).name.fr }}
+							</router-link>
+							{{ evolution.condition }} ▲ <br>
+						</div>
+					</td>
+				</tr>
+
+				<tr style="  box-shadow: 0 0 10px 4px rgba(234,70,70,0.5);">
+					<td colspan="2">
+						<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+							<img :src="pokemon.sprites.regular" alt="current pokemon sprite">
+							<br>
+							{{ pokemon.name.fr }}
+						</div>
+					</td>
+				</tr>
+
+				<tr v-for="evolution in pokemon.evolution.next">
+					<td colspan="2">
+						<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+							{{ evolution.condition }} ▼ <br>
+							<img :src="getEvolutionPokemon(evolution.name).sprites.regular" alt="pokemon evolution sprite">
+							<br>
+							<router-link :to="{path: '/pokemon/' + getEvolutionPokemon(evolution.name).pokedexId}">
+								{{ getEvolutionPokemon(evolution.name).name.fr }}
+							</router-link>
+						</div>
+					</td>
+				</tr>
+
+				<tr v-if="pokemon.evolution.mega">
+					<td v-for="evolution in pokemon.evolution.mega">
+						<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+							▲ Mega évolution avec {{ evolution.orbe }} ▼ <br>
+							<img :src="evolution.sprites.regular" alt="pokemon evolution sprite">
+							<br>
+							Mega {{ pokemon.name.fr }}
+						</div>
+					</td>
+				</tr>
+				<tr v-for="pokemon in pokemon.evolution.next" v-else>
+					<td v-for="evolution in getEvolutionPokemon(pokemon.name).evolution.mega">
+						<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+							▲ Mega évolution avec {{ evolution.orbe }} ▼ <br>
+							<img :src="evolution.sprites.regular" alt="pokemon evolution sprite">
+							<br>
+							Mega {{ pokemon.name.fr }}
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="col-4" style="margin: auto">
+		<table aria-describedby="pokemon stats" class="table table-striped table-hover table-bordered">
 			<thead>
 				<tr>
 					<th scope="col">Statistique</th>
@@ -162,42 +255,36 @@ let pokemon = pokemonStore.getPokemonById(route.params.id);
 					<td>
 						<progress class="Health" max="255" v-bind:value="pokemon.stats.hp"></progress>
 					</td>
-					<br>
 				</tr>
 				<tr>
 					<td><span>ATK: {{ pokemon.stats.atk }}</span></td>
 					<td>
 						<progress class="Attaque" max="255" v-bind:value="pokemon.stats.atk"></progress>
 					</td>
-					<br>
 				</tr>
 				<tr>
 					<td><span>ATK SPE: {{ pokemon.stats.spe_atk }}</span></td>
 					<td>
 						<progress class="SpeAtt" max="255" v-bind:value="pokemon.stats.spe_atk"></progress>
 					</td>
-					<br>
 				</tr>
 				<tr>
 					<td><span>DEF: {{ pokemon.stats.def }}</span></td>
 					<td>
 						<progress class="Defense" max="255" v-bind:value="pokemon.stats.def"></progress>
 					</td>
-					<br>
 				</tr>
 				<tr>
 					<td><span>DEF SPE: {{ pokemon.stats.spe_def }}</span></td>
 					<td>
 						<progress class="SpeDef" max="255" v-bind:value="pokemon.stats.spe_def"></progress>
 					</td>
-					<br>
 				</tr>
 				<tr>
 					<td><span>VIT: {{ pokemon.stats.vit }}</span></td>
 					<td>
 						<progress class="Speed" max="255" v-bind:value="pokemon.stats.vit"></progress>
 					</td>
-					<br>
 				</tr>
 			</tbody>
 		</table>
@@ -208,11 +295,15 @@ let pokemon = pokemonStore.getPokemonById(route.params.id);
 
 <style scoped>
 .table th:nth-child(1) {
-//width: 25%;
+	/* width: 25%; */
 }
 
 .table th:nth-child(2) {
-//width: 80%;
+	/* width: 85%; */
+}
+
+.evolution-table img {
+	max-height: 10em;
 }
 
 progress {

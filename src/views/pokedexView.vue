@@ -1,6 +1,6 @@
 <script setup>
 import Filters from "@/components/filters.vue";
-import PokemonList from "@/components/pokemonList.vue";
+import PokemonList from "@/views/pokemonList.vue";
 </script>
 
 <template>

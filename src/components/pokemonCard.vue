@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps({
+defineProps({
 	pokemon: Object,
 });
 </script>
@@ -7,7 +7,7 @@ const props = defineProps({
 <template>
 	<div class="pokemon-card">
 		<div class="row">
-			<img :src="pokemon.sprites.regular" @click="$emit('display-modal', pokemon)" alt="pokemon-sprite">
+			<img :src="pokemon.sprites.regular" alt="pokemon-sprite" @click="$emit('display-modal', pokemon)">
 		</div>
 
 		<div class="row">
@@ -51,10 +51,10 @@ const props = defineProps({
 				<p>Types:</p>
 			</div>
 			<div class="col-9 d-flex">
-				<div :class="type.name" v-for="type in pokemon.types" class="pokemon-type col-5 h-100 d-flex align-items-center"
+				<div v-for="type in pokemon.types" :class="type.name" class="pokemon-type col-5 h-100 d-flex align-items-center"
 				     style="justify-content: space-between">
-					<span style="padding: 0 10px 0 10px" class="col-8 text-center">{{ type.name }}</span>
-					<img class="col-4" :src="type.image" alt="pokemon-type">
+					<span class="col-8 text-center" style="padding: 0 10px 0 10px">{{ type.name }}</span>
+					<img :src="type.image" alt="pokemon-type" class="col-4">
 				</div>
 			</div>
 		</div>
@@ -63,7 +63,7 @@ const props = defineProps({
 
 <style scoped>
 .pokemon-card {
-	/*border: 1px solid red;*/
+	/* border: 1px solid red; */
 	box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
 	height: 100%;
 	padding: 20px;
@@ -79,6 +79,6 @@ const props = defineProps({
 }
 
 img {
-//width: 100%;
+	/* width: 100%; */
 }
 </style>

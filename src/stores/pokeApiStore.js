@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
-import {Pokemon} from "../class/pokemon.js";
 import {ref} from "vue";
+import {Pokemon} from "../class/pokemon.js";
 
 const baseUrl = 'https://tyradex.tech/api/v1/';
 
@@ -30,8 +30,6 @@ export const usePokeApiStore = defineStore('pokeApi', () => {
 		let data = await response.json();
 
 		for (let pokemon of data) {
-			// response = await fetch(pokemon.url)
-			// data = await response.json()
 
 			let currentPokemon = new Pokemon(
 				pokemon.pokedexId,
@@ -46,11 +44,11 @@ export const usePokeApiStore = defineStore('pokeApi', () => {
 				pokemon.evolution,
 				pokemon.height,
 				pokemon.weight,
-				pokemon.egg_groups,
-				pokemon.sexe,
-				pokemon.catch_rate,
-				pokemon.level_100,
-				pokemon.forme
+				pokemon.egg_group,
+				pokemon.genderRatio,
+				pokemon.catchRate,
+				pokemon.xpToLevel100,
+				pokemon.form
 			);
 			results.push(currentPokemon);
 		}
@@ -60,7 +58,7 @@ export const usePokeApiStore = defineStore('pokeApi', () => {
 
 	function getPokemonById(id) {
 		return allPokemons.find((pokemon) => {
-			return pokemon.pokedexId == id;
+			return parseInt(pokemon.pokedexId) === parseInt(id);
 		});
 	}
 
@@ -70,7 +68,7 @@ export const usePokeApiStore = defineStore('pokeApi', () => {
 		});
 	}
 
-	getAllPokemons();
+	void getAllPokemons();
 
 	return {allPokemons, getPokemonByName, getPokemonById};
 });
