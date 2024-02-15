@@ -4,32 +4,25 @@
 
 <template>
 	<header class="d-flex align-items-center">
-		<div class="col-4 h-100 d-flex align-items-center">
-			<!--			<router-link to="/" style="max-height: 90%">-->
-			<img alt="logo" src="../assets/logo.png">
+		<div class="col-6 h-100 d-flex align-items-center">
+			<router-link style="max-height: 90%" to="/">
+				<img alt="logo" src="../assets/logo.png">
 
-			<h3>
-				APIDEX
-			</h3>
-			<!--			</router-link>-->
-		</div>
-
-		<h1 class="text-center col-4">Pokedex using API and Vue JS</h1>
-
-		<div class="col-4">
-			<a class="source-code" href="https://github.com/Gabann/APIDEX">
-				<h3 class="d-flex align-items-center justify-content-end">
-					GitHub &nbsp;&nbsp;<i class="bi bi-github h1"></i>
+				<h3>
+					APIDEX
 				</h3>
-			</a>
+			</router-link>
 		</div>
 
-		<!--		<div class="col-4" style="text-align: right" v-if="!useAuthenticationStore().loggedIn">-->
-		<!--			<a @click="router.push('/login/')">Login</a>-->
-		<!--		</div>-->
-		<!--		<div v-else class="col-4" style="text-align: right">-->
-		<!--			<span>Bonjour {{ useAuthenticationStore().email }}</span>-->
-		<!--		</div>-->
+		<!--		<h1 class="text-center col-4">Pokedex using API and Vue JS</h1>-->
+
+		<div class="col-6 d-flex">
+			<h3 class="d-flex align-items-center justify-content-end">
+				<a class="source-code" href="https://github.com/Gabann/APIDEX">
+					GitHub<i class="bi bi-github h1" style="margin-left: 10px"></i>
+				</a>
+			</h3>
+		</div>
 	</header>
 </template>
 
@@ -54,7 +47,14 @@ header h1, h2, h3, h4, h5, h6 {
 }
 
 .source-code {
-	all: unset;
+	text-decoration: none;
+	color: inherit;
+}
+
+.d-flex {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .source-code:hover {

@@ -28,7 +28,7 @@ let isShiny = ref(false);
 				</div>
 			</div>
 
-			<div class="row">
+			<div v-if="pokemon.height" class="row">
 				<div class="col-3">
 					<p>Taille:</p>
 				</div>
@@ -37,7 +37,7 @@ let isShiny = ref(false);
 				</div>
 			</div>
 
-			<div class="row">
+			<div v-if="pokemon.weight" class="row">
 				<div class="col-3">
 					<p>Poids:</p>
 				</div>

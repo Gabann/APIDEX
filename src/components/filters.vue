@@ -1,7 +1,7 @@
 <script setup>
-import {ref, watch} from "vue";
 import {Filter} from "@/class/filter.js";
 import {useFilterStore} from "@/stores/filterStore.js";
+import {ref, watch} from "vue";
 
 let filterStore = useFilterStore();
 let generationFilter = ref(new Filter('generation', ''));
@@ -66,6 +66,10 @@ function clearFilters() {
 	margin: 5px 10px 5px 10px;
 	padding: 0 10px 0 10px;
 	border-radius: 10px;
+}
+
+.row {
+	padding: 10px;
 }
 
 label {

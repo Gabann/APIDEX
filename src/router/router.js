@@ -1,7 +1,7 @@
 import NotFound from "@/components/notFound.vue";
-import PokemonDetails from "@/components/pokemonDetails.vue";
 import LogInVue from "@/views/LogInVue.vue";
 import PokedexView from "@/views/pokedexView.vue";
+import PokemonDetails from "@/views/pokemonDetails.vue";
 import {createRouter, createWebHistory} from 'vue-router';
 
 const routes = [
