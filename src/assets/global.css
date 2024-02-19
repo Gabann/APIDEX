@@ -1,5 +1,5 @@
 :root {
-	--main-color: cornflowerblue;
+	--main-color: #009bd6;
 
 	--normal-color: #9fa19f;
 	--feu-color: #e62829;
@@ -19,6 +19,10 @@
 	--tenebres-color: #50413f;
 	--acier-color: #60a1b8;
 	--fee-color: #ef71ef;
+}
+
+body {
+	background-color: #FAF9F6;
 }
 
 .Fée {

@@ -5,8 +5,8 @@
 <template>
 	<header class="d-flex align-items-center">
 		<div class="col-6 h-100 d-flex align-items-center">
-			<router-link style="max-height: 90%" to="/">
-				<img alt="logo" src="../assets/logo.png">
+			<router-link class="align-vertically" style="display: flex; height: 100%" to="/">
+				<img alt="logo" src="../assets/logo.png" style="max-height: 90%; margin-right: 15px">
 
 				<h3>
 					APIDEX
@@ -16,10 +16,14 @@
 
 		<!--		<h1 class="text-center col-4">Pokedex using API and Vue JS</h1>-->
 
-		<div class="col-6 d-flex">
-			<h3 class="d-flex align-items-center justify-content-end">
-				<a class="source-code" href="https://github.com/Gabann/APIDEX">
-					GitHub<i class="bi bi-github h1" style="margin-left: 10px"></i>
+		<div class="col-6 d-flex" style="height: 100%">
+			<h3 class="d-flex align-items-center justify-content-end" style="height: 100%">
+				<a class="align-vertically source-code" href="https://github.com/Gabann/APIDEX" style="height: 100%">
+					<span class="source-code">
+						GitHub
+					</span>
+					<i class="bi bi-github icon-100 align-vertically"
+					   style="margin-left: 10px; font-size: 6vh ; text-decoration: none !important;"></i>
 				</a>
 			</h3>
 		</div>
@@ -28,21 +32,13 @@
 
 <style scoped>
 header {
-	height: 7vh;
+	height: 8vh;
 	background-color: var(--main-color);
 	padding: 0 30px 0 30px;
 	margin-bottom: 15px;
 }
 
-header img {
-	max-height: 90%;
-}
-
 header h1, h2, h3, h4, h5, h6 {
-	margin: 0;
-}
-
-.h1 {
 	margin: 0;
 }
 
@@ -51,13 +47,19 @@ header h1, h2, h3, h4, h5, h6 {
 	color: inherit;
 }
 
+.source-code:hover {
+	text-decoration: underline;
+}
+
 .d-flex {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-.source-code:hover {
-	text-decoration: underline;
+.align-vertically {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 </style>

@@ -71,7 +71,7 @@ defineProps({
 }
 
 .pokemon-card:hover {
-	background-color: rgba(170, 187, 255, 1);
+	background-color: #009bd6;
 }
 
 .pokemon-type {

@@ -21,7 +21,7 @@ let isShiny = ref(false);
 			<div v-if="pokemon.sprites" class="row">
 				<img :src="isShiny ? pokemon.sprites.shiny : pokemon.sprites.regular" alt="pokemon sprite">
 				<div>
-					<button @click="isShiny = !isShiny">
+					<button v-if="pokemon.sprites.shiny" @click="isShiny = !isShiny">
 
 						<i :class="'bi ' + (isShiny ? 'bi-star-fill' : 'bi-star')"></i>
 					</button>

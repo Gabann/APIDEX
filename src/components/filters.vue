@@ -13,12 +13,18 @@ watch(nameFilter, (newValue) => {
 	filterStore.searchQuery = newValue;
 });
 
+watch(generationFilter.value, (newValue) => {
+	if (newValue.filter) {
+		filterStore.addFilter(newValue);
+	} else filterStore.removeFilter('generation', '');
+});
+
 function handleCheckboxChange(event, type) {
 	if (event.target.checked) {
 		filterStore.addFilter(new Filter('types', type));
 		event.target.classList.toggle("unselected");
 	} else {
-		filterStore.removeFilter(new Filter('types', type));
+		filterStore.removeFilter('types', type);
 	}
 }
 
@@ -38,14 +44,14 @@ function clearFilters() {
 <template>
 	<div class="py-4 d-flex  justify-content-center align-items-center flex-column">
 		<label for='generation-filter'></label>
-		<select id='generation-filter' v-model="generationFilter.filter" @change="filterStore.addFilter(generationFilter)">
-			<option disabled selected value="">Generation filter</option>
-			<option value="">Aucun</option>
-			<option v-for="i in 9" :value=i>{{ i }}</option>
+		<select id='generation-filter' v-model="generationFilter.filter">
+			<option disabled selected value="">Filtre de génération</option>
+			<option value="">Toutes les générations</option>
+			<option v-for="i in 9" :value=i>Génération {{ i }}</option>
 		</select>
 
 		<div class="row">
-			<input id="" v-model="nameFilter" name="" placeholder="Nom ou numéro de pokedex" type="text">
+			<input id="" v-model="nameFilter" name="" placeholder="Nom ou nº de pokedex" type="text">
 		</div>
 
 		<div class="d-flex flex-wrap type-filter-container">
@@ -82,5 +88,9 @@ input[type="checkbox"]:not(:checked) + label {
 
 input[type="checkbox"]:hover + label {
 	opacity: 0.65;
+}
+
+input[type="checkbox"]:checked + label {
+	opacity: 1;
 }
 </style>

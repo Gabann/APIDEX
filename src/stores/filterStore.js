@@ -1,3 +1,4 @@
+import {Filter} from "@/class/filter.js";
 import {defineStore} from "pinia";
 import {computed, ref} from "vue";
 import {usePokeApiStore} from "./pokeApiStore.js";
@@ -45,7 +46,8 @@ export const useFilterStore = defineStore('filterStore', () => {
 		console.log(filterArray.value);
 	}
 
-	function removeFilter(filter) {
+	function removeFilter(filterName, filterValue) {
+		let filter = new Filter(filterName, filterValue);
 		filterArray.value = filterArray.value.filter(f => !(f.property === filter.property && f.filter === filter.filter));
 		console.log(filterArray.value);
 	}
