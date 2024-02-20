@@ -1,9 +1,12 @@
 import {Filter} from "@/class/filter.js";
+import {usePageStore} from "@/stores/pageStore.js";
 import {defineStore} from "pinia";
 import {computed, ref} from "vue";
-import {usePokeApiStore} from "./pokeApiStore.js";
+import {usePokeApiStore} from "./apiStore.js";
 
 export const useFilterStore = defineStore('filterStore', () => {
+
+	let pageStore = usePageStore();
 
 	let pokeApiStore = usePokeApiStore();
 	let filterArray = ref([]);
@@ -43,18 +46,21 @@ export const useFilterStore = defineStore('filterStore', () => {
 			filterArray.value.push(filter);
 		}
 
-		console.log(filterArray.value);
+		pageStore.currentPage = 1;
 	}
 
 	function removeFilter(filterName, filterValue) {
 		let filter = new Filter(filterName, filterValue);
 		filterArray.value = filterArray.value.filter(f => !(f.property === filter.property && f.filter === filter.filter));
-		console.log(filterArray.value);
+
+		pageStore.currentPage = 1;
 	}
 
 	function clearFilters() {
 		filterArray.value = [];
 		searchQuery.value = '';
+
+		pageStore.currentPage = 1;
 	}
 
 	function containsValue(obj, targetValue) {

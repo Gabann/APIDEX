@@ -1,20 +1,17 @@
 <script setup>
 import {useFilterStore} from "@/stores/filterStore.js";
-import {inject} from "vue";
+import {usePageStore} from "@/stores/pageStore.js";
 
 let filterStore = useFilterStore();
-const updateCurrentPage = inject("currentPage").updateCurrentPage;
-const currentPage = inject('currentPage').currentPage;
-const pokemonsPerPage = inject('pokemonsPerPage').pokemonsPerPage;
+let pageStore = usePageStore();
 
 function forceNumberInput(event) {
 	event.target.value = Number(event.target.value.replace(/^0-9/g, Number(1)));
 }
 
 function switchPage(targetPage) {
-	if (targetPage !== currentPage) {
-		updateCurrentPage(Math.floor(Math.min(Math.max(targetPage, 1), (filterStore.filteredPokemonArray.length / pokemonsPerPage) + 1)));
-		window.scrollTo(0, 0);
+	if (targetPage !== pageStore.currentPage) {
+		pageStore.currentPage = (Math.floor(Math.min(Math.max(targetPage, 1), pageStore.maxPage)));
 	}
 }
 </script>
@@ -25,29 +22,32 @@ function switchPage(targetPage) {
 
 			<ul class="pagination">
 				<li class="page-item">
-					<button class="btn btn-outline-primary page-button" @click="switchPage(1)">&lt;&lt;</button>
+					<button :disabled="pageStore.currentPage === 1" class="btn btn-outline-primary page-button"
+					        @click="switchPage(1)">&lt;&lt;
+					</button>
 				</li>
 				<li class="page-item">
-					<button class="btn btn-outline-primary page-button" @click="switchPage(currentPage - 1)">&lt;</button>
+					<button class="btn btn-outline-primary page-button" @click="switchPage(pageStore.currentPage - 1)">&lt;</button>
 				</li>
-				<li v-if="currentPage - 1 > 0" class="page-item page-number">
-					<button class="btn btn-outline-primary page-button" @click="switchPage(currentPage-1)">{{ currentPage - 1 }}
+				<li v-if="pageStore.currentPage - 1 > 0" class="page-item page-number">
+					<button class="btn btn-outline-primary page-button"
+					        @click="switchPage(pageStore.currentPage-1)">{{ pageStore.currentPage - 1 }}
 					</button>
 				</li>
 				<li class="page-item page-number">
-					<input :value="currentPage" class="btn btn-outline-primary page-button" style="width: auto" type="number"
+					<input :value="pageStore.currentPage" class="btn btn-outline-primary page-button" style="width: auto" type="number"
 					       @change="switchPage($event.target.value)"
 					       @input="forceNumberInput">
 				</li>
 				<li class="page-item page-number">
-					<button v-if="currentPage + 1 < filterStore.filteredPokemonArray.length / 20"
+					<button v-if="pageStore.currentPage + 1 < filterStore.filteredPokemonArray.length / 20"
 					        class="btn btn-outline-primary page-button"
-					        @click="switchPage(currentPage+1)">
-						{{ currentPage + 1 }}
+					        @click="switchPage(pageStore.currentPage+1)">
+						{{ pageStore.currentPage + 1 }}
 					</button>
 				</li>
 				<li class="page-item">
-					<button class="btn btn-outline-primary page-button" @click="switchPage(currentPage + 1)"> ></button>
+					<button class="btn btn-outline-primary page-button" @click="switchPage(pageStore.currentPage + 1)"> ></button>
 				</li>
 				<li class="page-item">
 					<button class="btn btn-outline-primary page-button" @click="switchPage(999999999)">>></button>

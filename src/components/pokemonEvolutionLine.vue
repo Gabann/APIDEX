@@ -1,5 +1,5 @@
 <script setup>
-import {usePokeApiStore} from "@/stores/pokeApiStore.js";
+import {usePokeApiStore} from "@/stores/apiStore.js";
 
 defineProps({
 	pokemon: Object,
@@ -42,7 +42,7 @@ function getFirstPokemonEvolutionLine(pokemonName) {
 				</td>
 			</tr>
 
-			<tr style="  box-shadow: 0 0 10px 4px rgba(234,70,70,0.5);">
+			<tr class="current-pokemon">
 				<td colspan="2">
 					<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
 						<img :src="pokemon.sprites.regular" alt="current pokemon sprite">
@@ -92,5 +92,11 @@ function getFirstPokemonEvolutionLine(pokemonName) {
 <style scoped>
 .evolution-table img {
 	max-height: 10em;
+}
+
+.current-pokemon {
+	box-shadow: 0 0 10px 4px var(--main-color);
+	position: relative;
+	z-index: 1;
 }
 </style>

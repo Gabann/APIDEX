@@ -9,19 +9,17 @@ export const usePokeApiStore = defineStore('pokeApi', () => {
 
 	async function getAllPokemons() {
 		if (!localStorage.getItem("allPokemons")) {
-			console.log("used api");
 			try {
 				let response = await fetch(baseUrl + `pokemon`);
 				let formattedResponse = await formatApiResponse(response);
 
-				allPokemons = formattedResponse;
+				allPokemons.value = formattedResponse;
 				localStorage.setItem('allPokemons', JSON.stringify(formattedResponse));
 			} catch (e) {
 				console.error(e);
 			}
 		} else {
-			console.log("used local storage");
-			allPokemons = JSON.parse(localStorage.getItem('allPokemons'));
+			allPokemons.value = JSON.parse(localStorage.getItem('allPokemons'));
 		}
 	}
 
@@ -57,13 +55,13 @@ export const usePokeApiStore = defineStore('pokeApi', () => {
 	}
 
 	function getPokemonById(id) {
-		return allPokemons.find((pokemon) => {
+		return allPokemons.value.find((pokemon) => {
 			return parseInt(pokemon.pokedexId) === parseInt(id);
 		});
 	}
 
 	function getPokemonByName(name) {
-		return allPokemons.find((pokemon) => {
+		return allPokemons.value.find((pokemon) => {
 			return pokemon.name.fr.toLowerCase() === name.toLowerCase();
 		});
 	}

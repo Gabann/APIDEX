@@ -42,19 +42,27 @@ function clearFilters() {
 </script>
 
 <template>
-	<div class="py-4 d-flex  justify-content-center align-items-center flex-column">
-		<label for='generation-filter'></label>
-		<select id='generation-filter' v-model="generationFilter.filter">
-			<option disabled selected value="">Filtre de génération</option>
-			<option value="">Toutes les générations</option>
-			<option v-for="i in 9" :value=i>Génération {{ i }}</option>
-		</select>
-
+	<div class="d-flex justify-content-center align-items-center flex-column">
 		<div class="row">
-			<input id="" v-model="nameFilter" name="" placeholder="Nom ou nº de pokedex" type="text">
+			<div class="col-6 row justify-content-center align-items-center">
+				<label for='generation-filter'>Filtre par génération :</label>
+				<select id='generation-filter' v-model="generationFilter.filter" class="form-select w-auto">
+					<option disabled selected value="">Filtre de génération</option>
+					<option value="">Toutes les générations</option>
+					<option v-for="i in 9" :value=i>Génération {{ i }}</option>
+				</select>
+			</div>
+
+			<div class="col-6 row justify-content-center align-items-center">
+				<label for='name-or-id-filter'>Filtre par nom ou numéro de pokedex :</label>
+				<input id="name-or-id-filter" v-model="nameFilter" class="form-control w-auto center" name=""
+				       placeholder="Nom ou nº de pokedex"
+				       type="text">
+			</div>
 		</div>
 
-		<div class="d-flex flex-wrap type-filter-container">
+		<div class="col-xl-6 col-lg-6 col-md-10 col-sm-12 col-xs-12 d-flex flex-wrap type-filter-container">
+			<!--			<span>Filtre par type:</span>-->
 			<div v-for="type in pokemonTypes" :key="type">
 				<input v-show="false" :id="type" :value="type" type="checkbox" @change="handleCheckboxChange($event, type)">
 				<label :class="type" :for="type" class="type">{{ type }}</label>
@@ -62,7 +70,7 @@ function clearFilters() {
 		</div>
 
 		<div class="row">
-			<button class="btn btn-danger" @click="clearFilters">Clear filters</button>
+			<button class="btn btn-danger" @click="clearFilters">Réinitialiser les filtres</button>
 		</div>
 	</div>
 </template>
@@ -72,6 +80,13 @@ function clearFilters() {
 	margin: 5px 10px 5px 10px;
 	padding: 0 10px 0 10px;
 	border-radius: 10px;
+}
+
+.type-filter-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
 }
 
 .row {

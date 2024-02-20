@@ -3,38 +3,26 @@ import PageNavigation from "@/components/pageNavigation.vue";
 import PokemonCard from "@/components/pokemonCard.vue";
 import PokemonModal from "@/components/pokemonModal.vue";
 import {useFilterStore} from "@/stores/filterStore.js";
+import {usePageStore} from "@/stores/pageStore.js";
 import {Modal} from "bootstrap";
-import {onMounted, provide, ref} from "vue";
+import {onMounted, ref} from "vue";
 
 let filterStore = useFilterStore();
+let pageStore = usePageStore();
+
 
 let modal;
 let modalPokemon = ref({});
 
-let currentPage = ref(1);
-let pokemonsPerPage = 20;
 
 function displayModal(pokemon) {
 	modalPokemon.value = pokemon;
 	modal.show();
 }
 
-function updateCurrentPage(data) {
-	currentPage.value = data;
-}
-
-provide('currentPage', {
-	currentPage, updateCurrentPage
-});
-
-provide('pokemonsPerPage', {
-	pokemonsPerPage
-});
-
 onMounted(() => {
 	modal = new Modal(document.getElementById('pokemonModal'));
 });
-
 </script>
 
 <template>
@@ -42,16 +30,17 @@ onMounted(() => {
 		<div class="d-flex flex-wrap">
 
 			<template v-for="(pokemon, index) in filterStore.filteredPokemonArray">
-				<div v-if="index < (pokemonsPerPage * currentPage) && index >= (currentPage * pokemonsPerPage) - pokemonsPerPage"
-				     class="col-xl-3 col-md-4 col-12"
-				     style="padding: 20px">
+				<div
+					v-if="index < (pageStore.pokemonsPerPage * pageStore.currentPage) && index >= (pageStore.currentPage * pageStore.pokemonsPerPage) - pageStore.pokemonsPerPage"
+					class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12"
+					style="padding: 20px">
 					<PokemonCard :pokemon="pokemon" @display-modal="displayModal"></PokemonCard>
 				</div>
 			</template>
 		</div>
 
 		<div>
-			<PageNavigation :currentPage="currentPage" :pokemonsPerPage="pokemonsPerPage"></PageNavigation>
+			<PageNavigation></PageNavigation>
 		</div>
 	</div>
 	<div v-else style="display: flex; justify-content: center; align-items: center; height: 50vh;">
