@@ -28,9 +28,8 @@ export const usePokeApiStore = defineStore('pokeApi', () => {
 		let data = await response.json();
 
 		for (let pokemon of data) {
-
 			let currentPokemon = new Pokemon(
-				pokemon.pokedexId,
+				pokemon.pokedex_id,
 				pokemon.generation,
 				pokemon.category,
 				pokemon.name,
@@ -56,7 +55,7 @@ export const usePokeApiStore = defineStore('pokeApi', () => {
 
 	function getPokemonById(id) {
 		return allPokemons.value.find((pokemon) => {
-			return parseInt(pokemon.pokedexId) === parseInt(id);
+			return parseInt(pokemon.pokedex_id) === parseInt(id);
 		});
 	}
 

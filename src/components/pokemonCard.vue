@@ -5,7 +5,7 @@ defineProps({
 </script>
 
 <template>
-	<router-link :to="`/pokemon/${pokemon.pokedexId}`">
+	<router-link :to="`/pokemon/${pokemon.pokedex_id}`">
 		<div class="pokemon-card">
 			<div class="row">
 				<img :src="pokemon.sprites.regular" alt="pokemon-sprite" style="margin-bottom: 10px">
@@ -16,7 +16,7 @@ defineProps({
 					№
 				</div>
 				<div class="col-9">
-					<p>{{ pokemon.pokedexId }}</p>
+					<p>{{ pokemon.pokedex_id }}</p>
 				</div>
 			</div>
 

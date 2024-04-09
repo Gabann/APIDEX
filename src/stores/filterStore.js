@@ -28,7 +28,7 @@ export const useFilterStore = defineStore('filterStore', () => {
 	function searchByNameOrId(array, searchedName) {
 		return array.filter((pokemon) => {
 			let pokemonName = pokemon.name.fr.toUpperCase();
-			let pokemonId = pokemon.pokedexId.toString();
+			let pokemonId = pokemon.pokedex_id.toString();
 			searchedName = searchedName.toUpperCase();
 			return (pokemonName.includes(searchedName) || pokemonId.startsWith(searchedName));
 		});

@@ -1,5 +1,5 @@
 export class Pokemon {
-	pokedexId;
+	pokedex_id;
 	generation;
 	category;
 	name;
@@ -19,7 +19,7 @@ export class Pokemon {
 
 
 	constructor(pokedexId, generation, category, name, sprite, types, talents, stats, resistances, evolution, height, weight, egg_group, genderRatio, catchRate, xpToLevel100, form) {
-		this.pokedexId = pokedexId;
+		this.pokedex_id = pokedexId;
 		this.generation = generation;
 		this.category = category;
 		this.name = name;

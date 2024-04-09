@@ -17,16 +17,6 @@ function setPokemonById(id) {
 	pokemon.value = pokemonStore.getPokemonById(id);
 }
 
-// function setPokemonByName(pokemonName) {
-// 	pokemon.value = pokemonStore.getPokemonByName(pokemonName);
-//
-// 	router.replace({
-// 		path: "/pokemon/" + pokemon.value.pokedexId
-// 	});
-//
-// 	window.history.pushState({}, '', '/pokemon/' + pokemon.value.pokedexId);
-// }
-
 watch(route, (to) => {
 	pokemon.value = pokemonStore.getPokemonById(to.params.id);
 });

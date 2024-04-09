@@ -5,7 +5,7 @@ defineProps({
 </script>
 
 <template>
-	<table aria-describedby="pokemon stats" class="table table-striped table-hover table-bordered">
+	<table v-if="pokemon.stats" aria-describedby="pokemon stats" class="table table-striped table-hover table-bordered">
 		<thead>
 			<tr>
 				<th scope="col">Statistique</th>
