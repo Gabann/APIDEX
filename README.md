@@ -87,8 +87,8 @@ This app requires [Node.js](https://nodejs.org/en) to be installed
 
 ```bash
 # Clone the project:
-git clone https://github.com/Gabann/ECF-1.git
-cd .\ECF-1\Code
+git clone https://github.com/Gabann/apidex.git
+cd .\APIDEX
 
 # Install the dependencies:
 npm i
