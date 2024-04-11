@@ -34,7 +34,7 @@ function getFirstPokemonEvolutionLine(pokemonName) {
 					<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
 						<img :src="getEvolutionPokemon(evolution.name).sprites.regular" alt="pokemon evolution sprite">
 						<br>
-						<router-link :to="{path: '/pokemon/' + getEvolutionPokemon(evolution.name).pokedexId}">
+						<router-link :to="{path: '/pokemon/' + getEvolutionPokemon(evolution.name).pokedex_id}">
 							{{ getEvolutionPokemon(evolution.name).name.fr }}
 						</router-link>
 						{{ evolution.condition }} ▲ <br>
@@ -58,7 +58,7 @@ function getFirstPokemonEvolutionLine(pokemonName) {
 						{{ evolution.condition }} ▼ <br>
 						<img :src="getEvolutionPokemon(evolution.name).sprites.regular" alt="pokemon evolution sprite">
 						<br>
-						<router-link :to="{path: '/pokemon/' + getEvolutionPokemon(evolution.name).pokedexId}">
+						<router-link :to="{path: '/pokemon/' + getEvolutionPokemon(evolution.name).pokedex_id}">
 							{{ getEvolutionPokemon(evolution.name).name.fr }}
 						</router-link>
 					</div>

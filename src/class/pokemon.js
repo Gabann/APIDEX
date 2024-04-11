@@ -18,8 +18,8 @@ export class Pokemon {
 	form;
 
 
-	constructor(pokedexId, generation, category, name, sprite, types, talents, stats, resistances, evolution, height, weight, egg_group, genderRatio, catchRate, xpToLevel100, form) {
-		this.pokedex_id = pokedexId;
+	constructor(pokedex_id, generation, category, name, sprite, types, talents, stats, resistances, evolution, height, weight, egg_group, genderRatio, catchRate, xpToLevel100, form) {
+		this.pokedex_id = pokedex_id;
 		this.generation = generation;
 		this.category = category;
 		this.name = name;

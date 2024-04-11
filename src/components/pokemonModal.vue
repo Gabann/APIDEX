@@ -11,7 +11,7 @@ let isShiny = ref(false);
 <template>
 	<div class="modal-header">
 		<h5 v-if="pokemon.name" id="pokemonModal" class="modal-title">
-			{{ pokemon.pokedexId }} - {{ pokemon.name.fr }}
+			{{ pokemon.pokedex_id }} - {{ pokemon.name.fr }}
 		</h5>
 		<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
 	</div>

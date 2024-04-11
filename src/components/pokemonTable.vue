@@ -12,7 +12,7 @@ let isShiny = ref(false);
 	<table aria-describedby="pokemon details" class="table table-bordered table-responsive">
 		<thead>
 			<tr>
-				<th colspan="1"><span>№ {{ pokemon.pokedexId }}</span></th>
+				<th colspan="1"><span>№ {{ pokemon.pokedex_id }}</span></th>
 				<th colspan="3"><span>{{ pokemon.name.fr }}</span></th>
 			</tr>
 		</thead>
@@ -22,7 +22,7 @@ let isShiny = ref(false);
 					<div class="center-div" style="position: relative;">
 						<img :src="isShiny ? pokemon.sprites.shiny : pokemon.sprites.regular" alt="pokemon sprite" class="img-fluid">
 						<!--						<button style="position: absolute; bottom: 0; right: 0; margin: 10px">Button Text</button>-->
-						<button v-if="pokemon.sprites.shiny" class="shiny-toggle" style="position: absolute; bottom: 0; right: 0; margin: 
+						<button v-if="pokemon.sprites.shiny" class="shiny-toggle" style="position: absolute; bottom: 0; right: 0; margin:
 						10px"
 						        @click="isShiny = !isShiny">
 

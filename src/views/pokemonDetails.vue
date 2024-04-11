@@ -40,8 +40,13 @@ watch(route, (to) => {
 
 	<a href="https://www.pokepedia.fr/Statistique"><h2>Statistique: </h2></a>
 	<hr>
-	<div class="col-xl-5 col-lg-6 col-md-7 col-sm-9 col-xs-11" style="margin: auto">
+	<div v-if="pokemon.stats" class="col-xl-5 col-lg-6 col-md-7 col-sm-9 col-xs-11" style="margin: auto">
 		<PokemonStats :pokemon="pokemon"></PokemonStats>
+	</div>
+	<div v-else class="col-xl-6 col-lg-7 col-md-8 col-sm-10 col-xs-12" style="margin-left: auto;  margin-right: auto;">
+				<span>
+					{{ pokemon.name.fr }} n'a pas de statistiques.
+				</span>
 	</div>
 </template>
 
