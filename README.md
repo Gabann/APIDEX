@@ -127,10 +127,10 @@ npm run deploy
 ## Preview
 
 <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
-  <img style="padding: 20px" src="./documentation/preview/screenshot1.png" alt="App Screenshot" width="50%"/>
-  <img style="padding: 20px" src="./documentation/preview/screenshot2.png" alt="App Screenshot" width="50%"/>
-  <img style="padding: 20px" src="./documentation/preview/screenshot3.png" alt="App Screenshot" width="50%"/>
-  <img style="padding: 20px" src="./documentation/preview/screenshot4.png" alt="App Screenshot" width="50%"/>
+  <img style="padding: 20px" src="./documentation/preview/screenshot1.png" alt="App Screenshot" width="45%"/>
+  <img style="padding: 20px" src="./documentation/preview/screenshot2.png" alt="App Screenshot" width="45%"/>
+  <img style="padding: 20px" src="./documentation/preview/screenshot3.png" alt="App Screenshot" width="45%"/>
+  <img style="padding: 20px" src="./documentation/preview/screenshot4.png" alt="App Screenshot" width="45%"/>
 </div>
 
 <div align="right"><a href="#readme-top">back to top</a></div>
