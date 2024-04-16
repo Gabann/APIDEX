@@ -61,6 +61,8 @@ This app as been built as part of my study at [M2I](https://www.m2iformation.fr/
 The goal was to create a web app using Vue.js and pinia to fetch data from an [API](https://tyradex.tech/)  and display a list of
 pokemons and their details
 
+The app is available [Here](https://apidex.gaban.fr)
+
 ### Features
 
 - **Browse Pokemon**: Explore detailed information about all Pokemon species, including their types, stats, evolution line and more.
@@ -69,7 +71,10 @@ pokemons and their details
 
 ### Built With
 
-Frontend: [![Vue.js][VueBadge]][VueUrl] [![Pinia][PiniaBadge]][PiniaUrl] [![Bootstrap][BootstrapBagde]][BootstrapUrl] [![Node.js][NodeBadge]][NodeUrl]
+[![Vue.js][VueBadge]][VueUrl]
+[![Pinia][PiniaBadge]][PiniaUrl]
+[![Bootstrap][BootstrapBagde]][BootstrapUrl]
+[![Node.js][NodeBadge]][NodeUrl]
 
 Data from [Tyradex API](https://tyradex.tech/)
 
@@ -105,6 +110,13 @@ npm run dev
 ## Usage
 
 ```bash
+# Running the application:
+npm run dev
+```
+
+### Deployment
+
+```bash
 # Building the app:
 npm run build
 ```
@@ -115,7 +127,7 @@ As a static web app the app can be deployed to [github pages](https://pages.gith
 You can automatically build and deploy the app to the 'gh-pages' branch of the repo
 
 ```bash
-# Building the app and automaticaly push it to gh-pages branch:
+# Building the app and automatically push it to gh-pages branch:
 npm run deploy
 ```
 
@@ -140,7 +152,7 @@ npm run deploy
 
 ## Roadmap
 
-- [ ] Rework UI, make something more modern and eye pealing like [this](https://tyradex.vercel.app/dex)
+- [ ] Rework UI, make something more modern and eye pleasing like [this](https://tyradex.vercel.app/dex)
 - [ ] Add a way to update the local storage if the API data changes
 
 [//]: # (    - [ ] Nested Feature)
